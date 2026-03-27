@@ -1,117 +1,85 @@
-# Ex.No:2
+# Ex.No:1
 
-# Ex.Name: Write A CPP Program to implement BFS using vectors and queue (use float data)
-
+# Ex.Name:Write A C++ Program to represent the Adjacency Matrix
 
 ## Date:
-
 ## Aim:
-To implement Breadth-First Search (BFS) traversal of a graph using vectors and queue in C++, where vertex labels can be floating-point numbers.
+To represent a graph using an adjacency matrix in C++, where a 2D array is used to indicate edges between vertices.
 
 ## Algorithm:
 STEP 1: Start the program.
 
-STEP 2: Define a graph using vector<vector> g to store adjacency lists and vector v to track visited vertices.
+STEP 2: Define a 2D array vertArr[20][20] to store the adjacency matrix. Initialize all elements to 0.
 
-STEP 3: Define a function edge(int a, int b) to add an edge between vertices a and b in the graph.
+STEP 3: Define a function add_edge(int u, int v) to add an edge between vertex u and vertex v:
 
-STEP 4: Define a BFS function bfs(int u) that:
+Set vertArr[u][v] = 1
 
-Initializes a queue q and pushes the starting vertex u.
+Set vertArr[v][u] = 1 (for undirected graph)
 
-Marks u as visited: v[u] = true.
+STEP 4: Define a function displayMatrix(int v) to print the adjacency matrix:
 
-While the queue is not empty:
+Loop through all vertices i and j
 
-Pop a vertex n from the front.
+Print vertArr[i][j]
 
-Print n.
+STEP 5: In main(), define the number of vertices (x = 6) and two variables for edges (a, b).
 
-For all adjacent vertices of n, if not visited, push into the queue and mark as visited.
+STEP 6: Read 6 edges from the user using a loop.
 
-STEP 5: In main(), read number of vertices n and edges a.
+STEP 7: Call add_edge(a, b) for each input pair to fill the adjacency matrix.
 
-STEP 6: Assign v and g vectors with size n.
-
-STEP 7: Read a edges and call edge(x, y) for each edge.
-
-STEP 8: Loop through all vertices and call bfs(i) for unvisited vertices to cover disconnected components.
+STEP 8: Call displayMatrix(x) to display the adjacency matrix.
 
 STEP 9: End the program.
-
-STEP 10: Display the BFS traversal.
 
 
 
 
 ## Program:
 ```
-#include <bits/stdc++.h>
-#define pb push_back
-
+#include<iostream>
 using namespace std;
-
-vector<bool> v;
-vector<vector<int> > g;
-
-void edge(int a, int b)
+int vertArr[20][20]; 
+int count = 0;
+void displayMatrix(int v) 
 {
-    g[a].pb(b);
-    g[b].pb(a);
-}
-
-void bfs(int u)
-{
-	queue<int> q;
-	q.push(u);
-	v[u]=true;
-	
-	while(!q.empty())
-	{
-	    int n = q.front();
-	    q.pop();
-	    cout<<n<<" ";
-	    
-	    for(auto i=g[n].begin();i!=g[n].end();i++)
-	    {
-	        if(!v[*i])
-	        {
-	            q.push(*i);
-	            v[*i] = true;
-	        }
-	    }
-	}
-}
-
-int main()
-{
-	int n,a;
-    cin>>n>>a;
-    
-    v.assign(n,false);
-    g.assign(n, vector<int> ());
-    int x,y;
-    for(int i=0;i<a;i++)
+    int i,j;
+    for(i=0;i<v;i++)
     {
-        cin>>x>>y;
-        edge(x,y);
+        for(j=0;j<v;j++)
+        {
+            cout<<vertArr[i][j]<<" ";
+        }
+        cout<<endl;
     }
-    for(int i=0;i<n;i++)
-    {
-        if(!v[i])
-            bfs(i);
-        
-    }
-	return 0;
+}
+void add_edge(int u, int v) 
+{      
+    vertArr[u][v] = 1;
+    vertArr[v][u] = 1;
+  
+}
+int main() 
+{
+    int x=6,a,b;
+   for(int i=0;i<6;i++)
+   {
+       cin>>a>>b;
+        add_edge(a,b);
+   }
+   displayMatrix(x);
+   return 0;
+   return 0;
 }
 ```
 
 
 ## Output:
-<img width="554" height="596" alt="519162201-65cbe19b-e47d-48e1-ab6c-46124ab86420" src="https://github.com/user-attachments/assets/aea37fd9-bbc1-44d3-a397-87269c943f26" />
+<img width="577" height="775" alt="519161332-f9100426-37f5-4622-aff4-f3f192d4e777" src="https://github.com/user-attachments/assets/3e43a68f-1f3f-4b59-9789-07cf2c32d14b" />
 
 
 
  ## Result:
+The program creates a graph with 6 edges based on user input and displays its adjacency matrix.
 
-The program prints the BFS traversal of a graph with float-labeled vertices.
